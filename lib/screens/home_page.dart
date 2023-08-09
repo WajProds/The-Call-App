@@ -28,21 +28,23 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         title: const Text(
-          'Voice Call',
-          style: TextStyle(fontSize: 30, color: Colors.black),
+          'Video Call',
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         toolbarHeight: 100,
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 183, 214, 234),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             const SizedBox(height: 40),
-            roleSelector(1, hostController, joinController, context),
-            const SizedBox(height: 10),
-            roleSelector(2, hostController, joinController, context),
+            roleSelector(joinController, context),
           ],
         ),
       ),

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:looper/screens/call.dart';
-import 'package:looper/screens/new_call.dart';
+// import 'package:looper/screens/call.dart';
+// import 'package:looper/screens/new_call.dart';
 import 'package:looper/utils/constants.dart';
 
-Widget roleSelector(int role, TextEditingController joinController,
-    TextEditingController hostController, BuildContext context) {
+import '../screens/call.dart';
+
+Widget roleSelector(
+    TextEditingController joinController, BuildContext context) {
   // ignore: unused_local_variable
   String? channelID;
-  final controller = role == 1 ? hostController : joinController;
+  final controller = joinController;
 
   return Container(
     decoration: BoxDecoration(
@@ -19,41 +21,24 @@ Widget roleSelector(int role, TextEditingController joinController,
         const SizedBox(
           height: 30,
         ),
-        Text(
-          role == 1 ? 'Host a call' : 'Join a call',
-          style: const TextStyle(fontSize: 30, color: Colors.white),
+        const Text(
+          'Join Channel',
+          style: TextStyle(
+              fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
         Row(
           children: [
             const SizedBox(
               width: 20,
             ),
-            Container(
-                constraints:
-                    const BoxConstraints(maxWidth: 200, maxHeight: 200),
-                child: CircleAvatar(
-                  radius: 80,
-                  backgroundImage: role != 1
-                      ? const AssetImage(
-                          'assets/1.png',
-                        )
-                      : const AssetImage('assets/2.png'),
-                )),
-            const SizedBox(
-              width: 20,
-            ),
             Expanded(
               child: Column(
                 children: [
-                  Text(
-                    role == 1 ? 'Create channel' : 'Join a channel',
-                    style: const TextStyle(fontSize: 25, color: Colors.white),
-                  ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -63,25 +48,24 @@ Widget roleSelector(int role, TextEditingController joinController,
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: TextField(
                       controller: controller,
-                      decoration:
-                          const InputDecoration(border: InputBorder.none),
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter Channel ID'),
                     ),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 15,
                   ),
                   TextButton(
                     onPressed: () {
                       channelID = controller.text;
                       controller.text = '';
-                      print(role == 1 ? channelID : 'joining');
 
                       if (channelID == channelName) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CallScreenNew(
-                                      role: role,
+                                builder: (context) => const CallScreen(
                                       channelName: channelName,
                                     )));
                       } else {
@@ -89,7 +73,7 @@ Widget roleSelector(int role, TextEditingController joinController,
                       }
                     },
                     child: Text(
-                      role == 1 ? 'Create' : 'Join',
+                      'Join',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.indigo[700],
@@ -105,7 +89,7 @@ Widget roleSelector(int role, TextEditingController joinController,
           ],
         ),
         const SizedBox(
-          height: 35,
+          height: 25,
         ),
       ],
     ),
