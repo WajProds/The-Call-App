@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:looper/screens/chat_screen.dart';
 
 import '../widgets/role_selector.dart';
 
@@ -45,6 +46,25 @@ class _HomePageState extends State<HomePage> {
           children: [
             const SizedBox(height: 40),
             roleSelector(joinController, context),
+            const SizedBox(height: 40),
+            RawMaterialButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChatScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'To Chat Screen',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            )
           ],
         ),
       ),
